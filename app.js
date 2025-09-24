@@ -4,6 +4,10 @@ function init(SeletorFrase, seletorAutor, seletorBtn) {
     const autor = document.querySelector(seletorAutor);
     const btn = document.querySelector(seletorBtn);
     const body = document.querySelector('body');
+    let citacaoAtual = '';
+    let citacaoURL = '';
+    const copy = document.querySelector('.btn-copy');
+    const whatsapp = document.querySelector('.btn-whatsapp');
 
     // Tratativa de erro
     if (frase && autor && btn) {
@@ -22,12 +26,26 @@ function init(SeletorFrase, seletorAutor, seletorBtn) {
                 // Insere os dados no DOM
                 frase.innerText = aleatorio.quote;
                 autor.innerText = aleatorio.author;
+
+                // Modificação: Prepara a citação numa variavel para ser copiada
+                citacaoAtual = `${aleatorio.quote} - ${aleatorio.author}`;
+                
+                // Modificação: prepara a citação codificada numa variavel para ser enviada por url 
+                citacaoURL = encodeURIComponent(citacaoAtual);
+
+                // Modificação: Prepara a url com a citação codificada
+                const linkWhatsapp = `https://api.whatsapp.com/send?text=${citacaoURL}`;
+                // Modificação: Atualiza o botão/link com a url codificada
+                whatsapp.href = linkWhatsapp;
+
                 return gradientColor();
 
+                
             } catch (erro) {
                 console.log(erro);
             }
 
+            
         }
 
         async function gradientColor() {
@@ -47,12 +65,17 @@ function init(SeletorFrase, seletorAutor, seletorBtn) {
             } catch (erro) {
                 console.log(erro)
             }
-
-
         }
 
+        
         // Evento do botão
         btn.addEventListener('click', activeApp);
+
+        // Modificação: função para copiar a citação usando a api do navegador, clip boardAPI
+        copy.addEventListener('click', function(){
+            navigator.clipboard.writeText(citacaoAtual)
+
+        });
 
         // Ativando a função quando entra no site
         activeApp();
@@ -62,3 +85,5 @@ function init(SeletorFrase, seletorAutor, seletorBtn) {
 }
 // Chamando a função geral para inicar o codigo
 init('.frase', '.autor', '.btn-novo');
+
+
