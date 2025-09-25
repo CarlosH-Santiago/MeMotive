@@ -51,6 +51,24 @@ body {
 .estrutura blockquote cite::before {
     content: '';
     height: 2px;
+    width: 50px;
+    display: inline-block;
+    background: #FFF;
+    margin-right: 10px;
+}
+
+.estrutura blockquote cite-anime {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-style: normal;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.estrutura blockquote cite-anime::before {
+    content: '';
+    height: 2px;
     width: 20px;
     display: inline-block;
     background: #FFF;

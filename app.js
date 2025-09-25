@@ -1,7 +1,11 @@
-function init(SeletorFrase, seletorAutor, seletorBtn) {
+
+// Modificação: mudar as frases para frases de anime e adiconar uma classe de dado a mais, "anime"
+
+function init(SeletorFrase, seletorAutor, seletorAnime, seletorBtn) {
     // Selecionando elementos do DOM
     const frase = document.querySelector(SeletorFrase);
     const autor = document.querySelector(seletorAutor);
+    const anime = document.querySelector(seletorAnime);
     const btn = document.querySelector(seletorBtn);
     const body = document.querySelector('body');
     let citacaoAtual = '';
@@ -10,7 +14,7 @@ function init(SeletorFrase, seletorAutor, seletorBtn) {
     const whatsapp = document.querySelector('.btn-whatsapp');
 
     // Tratativa de erro
-    if (frase && autor && btn) {
+    if (frase && autor && anime && btn) {
         // Função Assincrona puxando a frase da API
         async function activeApp() {
             try {
@@ -26,9 +30,10 @@ function init(SeletorFrase, seletorAutor, seletorBtn) {
                 // Insere os dados no DOM
                 frase.innerText = aleatorio.quote;
                 autor.innerText = aleatorio.author;
+                anime.innerText = aleatorio.anime;
 
                 // Modificação: Prepara a citação numa variavel para ser copiada
-                citacaoAtual = `${aleatorio.quote} - ${aleatorio.author}`;
+                citacaoAtual = `${aleatorio.quote} - ${aleatorio.author} - ${aleatorio.anime}`;
                 
                 // Modificação: prepara a citação codificada numa variavel para ser enviada por url 
                 citacaoURL = encodeURIComponent(citacaoAtual);
@@ -84,6 +89,6 @@ function init(SeletorFrase, seletorAutor, seletorBtn) {
 
 }
 // Chamando a função geral para inicar o codigo
-init('.frase', '.autor', '.btn-novo');
+init('.frase', '.autor', '.anime' , '.btn-novo');
 
 
